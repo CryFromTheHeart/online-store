@@ -1,3 +1,17 @@
 ul {
   list-style-type: none;
 }
+
+.sortBox {
+  margin: 0 -5px;
+}
+
+.sortButton {
+  margin: 0 5px;
+  background-color: white;
+  border: 0;
+}
+
+.img-expample {
+  border-radius: 10px;
+}

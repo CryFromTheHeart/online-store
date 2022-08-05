@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { Spinner } from 'react-bootstrap';
+import { Button, Spinner } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { actions } from '../../slices';
 import items from '../../../__fixtures__/items';
 import ItemBox from '../ItemBox';
+import FiltersBox from '../FiltersBox';
 
 const StorePage = () => {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
-  const { setInitialState } = actions;
+  const { setInitialState, setSort } = actions;
+
+  const handleClickSortButton = (name) => () => {
+    dispatch(setSort(name));
+  };
 
   useEffect(() => {
     setLoaded(false);
@@ -19,13 +24,37 @@ const StorePage = () => {
   }, []);
 
   return loaded ? (
-    <div className="container shadow rounded my-4">
+    <div className="container my-4">
       <div className="row">
-        <div className="col-3 overflow-hidden border-end pt-5 px-2">
+        <div className="col-3 overflow-hidden border-end pt-5 px-4 bg-light">
           <div className="">Категории</div>
+          <FiltersBox />
         </div>
         <div className="col">
-          <ItemBox />
+          <div className="d-flex p-2 sortBox">
+            <span className="text-muted">Сортировать по</span>
+            <button
+              className="sortButton"
+              onClick={handleClickSortButton('LOWPRICE')}
+            >
+              <span>Сначала недорогие</span>
+            </button>
+            <button
+              className="sortButton"
+              onClick={handleClickSortButton('HIGHERPRICE')}
+            >
+              <span>Сначала дорогие</span>
+            </button>
+            <button
+              className="sortButton"
+              onClick={handleClickSortButton('NAME')}
+            >
+              <span>По названию</span>
+            </button>
+          </div>
+          <div>
+            <ItemBox />
+          </div>
         </div>
       </div>
     </div>

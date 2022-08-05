@@ -1,15 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { Pagination } from '@mui/material';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { Button } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
-import { getChunkItems, getItemsCount } from '../selectors';
+import { getStorePageInfo } from '../selectors';
 import { actions } from '../slices';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 const Item = ({ id, name, desc, price }) => {
   const dispatch = useDispatch();
   const handleAddToCart = () => {
-    dispatch(actions.addToCart(id));
+    dispatch(actions.addToCart({ id, price }));
   };
 
   return (
@@ -18,7 +18,7 @@ const Item = ({ id, name, desc, price }) => {
         <img
           src="https://cdn.coderons.com/general/tagsall/451d7704-a8b6-45f8-88a8-3fb8e11871be.png"
           alt="Пример картинки"
-          className="d-block"
+          className="d-block img-expample"
         ></img>
       </div>
       <div className="col">
@@ -32,7 +32,7 @@ const Item = ({ id, name, desc, price }) => {
         </ul>
       </div>
       <div className="d-flex col flex-column p-3">
-        <div className="d-flex justify-content-end fw-bold fs-2">{price}</div>
+        <div className="d-flex justify-content-end fw-bold fs-2">{price} Р</div>
         <div className="d-flex justify-content-end">
           <Button onClick={handleAddToCart} className="">
             <AddShoppingCartIcon />
@@ -44,17 +44,14 @@ const Item = ({ id, name, desc, price }) => {
 };
 
 const ItemBox = () => {
-  const [page, setPage] = useState(1);
+  const { page, chunkItems: items, pageCount } = useSelector(getStorePageInfo);
+
+  const dispatch = useDispatch();
+
   const scrollRef = useRef();
 
-  const itemsCountShow = 10;
-  const items = useSelector(
-    getChunkItems(itemsCountShow * (page - 1), itemsCountShow * page)
-  );
-  const pageCount = Math.trunc(useSelector(getItemsCount) / itemsCountShow) + 1;
-
   const handleChangePage = (event, value) => {
-    setPage(value);
+    dispatch(actions.setPage(value));
     scrollRef.current.scrollTop = 0;
   };
 

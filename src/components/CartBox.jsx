@@ -1,23 +1,25 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getItemsForCart } from '../selectors';
 import { actions } from '../slices';
+import routes from '../routes';
 
 const Item = ({ id, name, desc, price, count }) => {
   const dispatch = useDispatch();
   const { removeFromCart, incrementCountById, decreamentCountById } = actions;
 
   const handleDeleteItemsFromCart = () => {
-    dispatch(removeFromCart(id));
+    dispatch(removeFromCart({ id, count, price }));
   };
 
   const handleIncrementCountItemsCart = () => {
-    dispatch(incrementCountById(id));
+    dispatch(incrementCountById({ id, price }));
   };
 
   const handleDecrementCountItemsCart = () => {
-    dispatch(decreamentCountById(id));
+    dispatch(decreamentCountById({ id, price }));
   };
 
   return (
@@ -64,11 +66,7 @@ const Item = ({ id, name, desc, price, count }) => {
 };
 
 const CartBox = () => {
-  const items = useSelector(getItemsForCart);
-  const costOfAll = items.reduce(
-    (acc, { price, count }) => (acc += parseInt(price) * count),
-    0
-  );
+  const { items, cost } = useSelector(getItemsForCart);
 
   return items.length !== 0 ? (
     <div className="row">
@@ -92,8 +90,11 @@ const CartBox = () => {
           className="bg-light my-4 p-3 d-inline-block float-right"
           style={{ width: '200px' }}
         >
-          {costOfAll}
+          {cost}
         </aside>
+        <Button as={Link} to={routes.orderPagePath()}>
+          Оформить заказ
+        </Button>
       </div>
     </div>
   ) : (
