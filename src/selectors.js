@@ -17,6 +17,16 @@ const getFilteredItems = (chunkItems, activeFilters) =>
     chunkItems
   );
 
+const getChunks = (items, page, countShowItems) => {
+  const start = (page - 1) * countShowItems;
+  const end = page * countShowItems;
+
+  return {
+    chunkItems: items.slice(start, end),
+    pageCount: Math.trunc(items.length / countShowItems) + 1,
+  };
+};
+
 export const getItemsInfo = (state) => state.itemsInfo;
 
 export const getItemsForCart = (state) => {
@@ -32,12 +42,16 @@ export const getItemsForCart = (state) => {
 export const getItemsCount = (state) => state.itemsInfo.items.length;
 
 export const getStorePageInfo = (state) => {
-  const { page, chunkItems, pageCount, sort } = state.storeInfo;
+  const { page, items, sort } = state.storeInfo;
   const { activeFilters } = state.filter;
 
-  const filteredItems = getFilteredItems(chunkItems, activeFilters);
+  const filteredItems = getFilteredItems(items, activeFilters);
 
-  const sortedChunk = getSortItems(filteredItems, sort);
+  const sortedItems = getSortItems(filteredItems, sort);
 
-  return { page, chunkItems: sortedChunk, pageCount };
+  const { chunkItems, pageCount } = getChunks(sortedItems, page, 10);
+
+  return { page, chunkItems, pageCount };
 };
+
+export const getModalInfo = (state) => state.modal;

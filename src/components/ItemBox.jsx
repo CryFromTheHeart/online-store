@@ -5,6 +5,7 @@ import { Button } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { getStorePageInfo } from '../selectors';
 import { actions } from '../slices';
+import ModalAddItem from './ModalAddItem';
 
 const Item = ({ id, name, desc, price }) => {
   const dispatch = useDispatch();
@@ -57,6 +58,7 @@ const ItemBox = () => {
 
   return (
     <section ref={scrollRef} className="d-flex flex-column">
+      <ModalAddItem />
       <div className="bg-light my-4 p-3 shadow-sm small">
         <h2 className="text-muted">Товары</h2>
       </div>

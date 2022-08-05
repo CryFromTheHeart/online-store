@@ -27,7 +27,7 @@ const StorePage = () => {
     <div className="container my-4">
       <div className="row">
         <div className="col-3 overflow-hidden border-end pt-5 px-4 bg-light">
-          <div className="">Категории</div>
+          <h4 className="">Фильтры</h4>
           <FiltersBox />
         </div>
         <div className="col">
