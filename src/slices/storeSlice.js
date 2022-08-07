@@ -21,6 +21,9 @@ const itemsSlice = createSlice({
     setSort: (state, { payload }) => {
       state.sort = payload;
     },
+    addItem: (state, { payload }) => {
+      state.items = [...state.items, payload];
+    },
   },
 });
 
