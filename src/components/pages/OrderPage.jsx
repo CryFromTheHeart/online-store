@@ -1,12 +1,12 @@
 import React from 'react';
-import OrderBox from '../orderBox';
+import OrderBox from '../OrderBox';
 
-const OrderPage = () => {
+function OrderPage() {
   return (
     <div className="container">
       <OrderBox />
     </div>
   );
-};
+}
 
 export default OrderPage;

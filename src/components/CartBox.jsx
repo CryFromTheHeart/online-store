@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -6,7 +7,9 @@ import { getItemsForCart } from '../selectors';
 import { actions } from '../slices';
 import routes from '../routes';
 
-const Item = ({ id, name, desc, price, count }) => {
+function Item({
+  id, name, desc, price, count,
+}) {
   const dispatch = useDispatch();
   const { removeFromCart, incrementCountById, decreamentCountById } = actions;
 
@@ -25,14 +28,19 @@ const Item = ({ id, name, desc, price, count }) => {
   return (
     <div className="d-flex flex-wrap row border-top mx-3">
       <div className="col">
-        <img src="https://cdn.coderons.com/general/tagsall/451d7704-a8b6-45f8-88a8-3fb8e11871be.png"></img>
+        <img
+          src="https://cdn.coderons.com/general/tagsall/451d7704-a8b6-45f8-88a8-3fb8e11871be.png"
+          alt="Пример картинки"
+        />
       </div>
       <div className="col">
         <h3 className="border-bottom p-2">{name}</h3>
         <ul>
           {Object.entries(desc).map(([key, value]) => (
             <li key={value}>
-              {key}: {value}
+              {key}
+              :
+              {value}
             </li>
           ))}
         </ul>
@@ -46,6 +54,7 @@ const Item = ({ id, name, desc, price, count }) => {
         </div>
         <div className="d-flex justify-content-end p-3">
           <button
+            type="button"
             onClick={handleDecrementCountItemsCart}
             className="border-0 bg-white"
             disabled={count === 1}
@@ -54,6 +63,7 @@ const Item = ({ id, name, desc, price, count }) => {
           </button>
           <div className="border-bottom p-1">{count}</div>
           <button
+            type="button"
             onClick={handleIncrementCountItemsCart}
             className="border-0 bg-white"
           >
@@ -63,9 +73,9 @@ const Item = ({ id, name, desc, price, count }) => {
       </div>
     </div>
   );
-};
+}
 
-const CartBox = () => {
+function CartBox() {
   const { items, cost } = useSelector(getItemsForCart);
 
   return items.length !== 0 ? (
@@ -109,6 +119,6 @@ const CartBox = () => {
       </section>
     </div>
   );
-};
+}
 
 export default CartBox;

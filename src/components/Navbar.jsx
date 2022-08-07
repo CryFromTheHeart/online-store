@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import routes from '../routes';
 import { actions } from '../slices';
 
-const Navbar = () => {
+function Navbar() {
   const dispatch = useDispatch();
   const { openModal } = actions;
 
@@ -23,7 +23,7 @@ const Navbar = () => {
         </BootstrapNavbar.Brand>
         <BootstrapNavbar.Collapse className="justify-content-end">
           <Button onClick={handleOpenModal}>
-            <AddIcon></AddIcon>
+            <AddIcon />
           </Button>
           <Button className="ms-2" as={Link} to={routes.cartPagePath()}>
             <ShoppingCartIcon />
@@ -32,5 +32,5 @@ const Navbar = () => {
       </Container>
     </BootstrapNavbar>
   );
-};
+}
 export default Navbar;

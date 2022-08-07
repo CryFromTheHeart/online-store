@@ -2,16 +2,14 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { actions } from '../slices';
 
-const FiltersBox = () => {
+function FiltersBox() {
   const dispatch = useDispatch();
   const { addFilter } = actions;
 
-  const handleChangeFilter =
-    (type) =>
-    ({ target }) => {
-      const { value } = target;
-      dispatch(addFilter({ type, value }));
-    };
+  const handleChangeFilter = (type) => ({ target }) => {
+    const { value } = target;
+    dispatch(addFilter({ type, value }));
+  };
 
   return (
     <div className="d-flex flex-column">
@@ -29,6 +27,6 @@ const FiltersBox = () => {
       </select>
     </div>
   );
-};
+}
 
 export default FiltersBox;

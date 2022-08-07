@@ -1,3 +1,5 @@
+/* eslint-disable no-param-reassign */
+
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
@@ -5,8 +7,6 @@ const initialState = {
   page: 1,
   sort: 'LOWPRICE',
 };
-
-const itemsCountShow = 7;
 
 const itemsSlice = createSlice({
   name: 'store',

@@ -7,7 +7,9 @@ import { getStorePageInfo } from '../selectors';
 import { actions } from '../slices';
 import ModalAddItem from './ModalAddItem';
 
-const Item = ({ id, name, desc, price }) => {
+function Item({
+  id, name, desc, price,
+}) {
   const dispatch = useDispatch();
   const handleAddToCart = () => {
     dispatch(actions.addToCart({ id, price }));
@@ -20,20 +22,26 @@ const Item = ({ id, name, desc, price }) => {
           src="https://cdn.coderons.com/general/tagsall/451d7704-a8b6-45f8-88a8-3fb8e11871be.png"
           alt="Пример картинки"
           className="d-block img-expample"
-        ></img>
+        />
       </div>
       <div className="col">
         <h3 className="border-bottom p-2">{name}</h3>
         <ul>
           {Object.entries(desc).map(([key, value]) => (
             <li key={value}>
-              {key}: {value}
+              {key}
+              :
+              {value}
             </li>
           ))}
         </ul>
       </div>
       <div className="d-flex col flex-column p-3">
-        <div className="d-flex justify-content-end fw-bold fs-2">{price} Р</div>
+        <div className="d-flex justify-content-end fw-bold fs-2">
+          {price}
+          {' '}
+          Р
+        </div>
         <div className="d-flex justify-content-end">
           <Button onClick={handleAddToCart} className="">
             <AddShoppingCartIcon />
@@ -42,9 +50,9 @@ const Item = ({ id, name, desc, price }) => {
       </div>
     </div>
   );
-};
+}
 
-const ItemBox = () => {
+function ItemBox() {
   const { page, chunkItems: items, pageCount } = useSelector(getStorePageInfo);
 
   const dispatch = useDispatch();
@@ -82,6 +90,6 @@ const ItemBox = () => {
       </div>
     </section>
   );
-};
+}
 
 export default ItemBox;

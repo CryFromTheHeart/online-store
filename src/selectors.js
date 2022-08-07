@@ -10,12 +10,10 @@ const getSortItems = (chunkItems, sort) => {
   return sorts[sort](chunkItems);
 };
 
-const getFilteredItems = (chunkItems, activeFilters) =>
-  Object.entries(activeFilters).reduce(
-    (acc, [type, value]) =>
-      value === '' ? acc : acc.filter(({ desc }) => desc[type] === value),
-    chunkItems
-  );
+const getFilteredItems = (chunkItems, activeFilters) => Object.entries(activeFilters).reduce(
+  (acc, [type, value]) => (value === '' ? acc : acc.filter(({ desc }) => desc[type] === value)),
+  chunkItems,
+);
 
 const getChunks = (items, page, countShowItems) => {
   const start = (page - 1) * countShowItems;

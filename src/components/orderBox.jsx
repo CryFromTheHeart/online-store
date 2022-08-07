@@ -3,7 +3,7 @@ import { Form, Row, Col, Button } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
-const OrderBox = () => {
+function OrderBox() {
   const formik = useFormik({
     initialValues: {
       phonenumber: '',
@@ -36,11 +36,7 @@ const OrderBox = () => {
         .moreThan(21, 'Должно быть больше 21'),
       cvv: yup.string().required('Обязательное поле'),
     }),
-    onSubmit: (values) => {
-      setTimeout(() => {
-        console.log(values), 1000;
-      });
-    },
+    onSubmit: (values) => {},
   });
 
   return (
@@ -58,7 +54,7 @@ const OrderBox = () => {
             placeholder="+79000000000"
             maxLength={12}
             type="tel"
-          ></Form.Control>
+          />
           <Form.Label htmlFor="phonenumber">Номер телефона</Form.Label>
           {formik.errors.phonenumber && formik.touched.phonenumber && (
             <Form.Control.Feedback type="invalid" tooltip>
@@ -77,7 +73,7 @@ const OrderBox = () => {
             value={formik.values.cardNumber}
             type="numeric"
             maxLength={16}
-          ></Form.Control>
+          />
           <Form.Label htmlFor="cardNumber">Номер карты</Form.Label>
           {formik.errors.cardNumber && formik.touched.cardNumber && (
             <Form.Control.Feedback type="invalid" tooltip>
@@ -99,7 +95,7 @@ const OrderBox = () => {
                 placeholder="ММ"
                 value={formik.values.expairMounth}
                 maxLength={2}
-              ></Form.Control>
+              />
               {formik.errors.expairMounth && formik.touched.expairMounth && (
                 <Form.Control.Feedback type="invalid" tooltip>
                   {formik.errors.expairMounth}
@@ -118,7 +114,7 @@ const OrderBox = () => {
                 placeholder="ГГ"
                 value={formik.values.expairYear}
                 maxLength={2}
-              ></Form.Control>
+              />
               {formik.errors.expairYear && formik.touched.expairYear && (
                 <Form.Control.Feedback type="invalid" tooltip>
                   {formik.errors.expairYear}
@@ -136,7 +132,7 @@ const OrderBox = () => {
             id="cvv"
             maxLength={3}
             value={formik.values.cvv}
-          ></Form.Control>
+          />
           <Form.Label htmlFor="password">Cvv</Form.Label>
           {formik.errors.cvv && formik.touched.cvv && (
             <Form.Control.Feedback type="invalid" tooltip>
@@ -154,7 +150,7 @@ const OrderBox = () => {
             id="address"
             maxLength={3}
             value={formik.values.address}
-          ></Form.Control>
+          />
           {formik.errors.address && formik.touched.address && (
             <Form.Control.Feedback type="invalid" tooltip>
               {formik.errors.address}
@@ -166,6 +162,6 @@ const OrderBox = () => {
       </Form>
     </section>
   );
-};
+}
 
 export default OrderBox;

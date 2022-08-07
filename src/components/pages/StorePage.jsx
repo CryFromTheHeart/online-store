@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Spinner } from 'react-bootstrap';
+import { Spinner } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { actions } from '../../slices';
 import items from '../../../__fixtures__/items';
 import ItemBox from '../ItemBox';
 import FiltersBox from '../FiltersBox';
 
-const StorePage = () => {
+function StorePage() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
   const { setInitialState, setSort } = actions;
@@ -34,18 +34,21 @@ const StorePage = () => {
           <div className="d-flex p-2 sortBox">
             <span className="text-muted">Сортировать по</span>
             <button
+              type="button"
               className="sortButton"
               onClick={handleClickSortButton('LOWPRICE')}
             >
               <span>Сначала недорогие</span>
             </button>
             <button
+              type="button"
               className="sortButton"
               onClick={handleClickSortButton('HIGHERPRICE')}
             >
               <span>Сначала дорогие</span>
             </button>
             <button
+              type="button"
               className="sortButton"
               onClick={handleClickSortButton('NAME')}
             >
@@ -65,6 +68,6 @@ const StorePage = () => {
       </Spinner>
     </div>
   );
-};
+}
 
 export default StorePage;

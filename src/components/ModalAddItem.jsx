@@ -1,28 +1,29 @@
 import React from 'react';
-import { Form, Row, Col } from 'react-bootstrap';
-import { Modal, Button } from 'react-bootstrap';
+import {
+  Form, Row, Col, Modal, Button,
+} from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { actions } from '../slices';
-import { getModalInfo } from '../selectors';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { uniqueId } from 'lodash';
+import { getModalInfo } from '../selectors';
+import { actions } from '../slices';
 
-const ModalAddItem = () => {
+function ModalAddItem() {
   const dispatch = useDispatch();
-  const { closeModal, addProperty, changePropertyInfo, addItem } = actions;
+  const {
+    closeModal, addProperty, changePropertyInfo, addItem,
+  } = actions;
   const { isOpen, propInfo } = useSelector(getModalInfo);
 
   const handleAddProperty = () => {
     dispatch(addProperty());
   };
 
-  const handleChangePropretyInfo =
-    (key, id) =>
-    ({ target }) => {
-      const { value } = target;
-      dispatch(changePropertyInfo({ key, id, value }));
-    };
+  const handleChangePropretyInfo = (key, id) => ({ target }) => {
+    const { value } = target;
+    dispatch(changePropertyInfo({ key, id, value }));
+  };
 
   const handleClose = () => {
     dispatch(closeModal());
@@ -39,7 +40,7 @@ const ModalAddItem = () => {
     }),
     onSubmit: (values) => {
       const desc = Object.fromEntries(
-        propInfo.map(({ title, value }) => [title, value])
+        propInfo.map(({ title, value }) => [title, value]),
       );
       const item = { id: uniqueId(), desc, ...values };
       dispatch(addItem(item));
@@ -63,7 +64,7 @@ const ModalAddItem = () => {
               isInvalid={formik.errors.name && formik.touched.name}
               name="name"
               id="name"
-            ></Form.Control>
+            />
             <Form.Label>Цена</Form.Label>
             <Form.Control
               type="number"
@@ -73,7 +74,7 @@ const ModalAddItem = () => {
               isInvalid={formik.errors.price && formik.touched.price}
               name="price"
               id="price"
-            ></Form.Control>
+            />
           </Form.Group>
 
           <Form.Group className="mb-2">
@@ -81,21 +82,21 @@ const ModalAddItem = () => {
             {propInfo.map(({ title, value, id }) => (
               <Row key={id}>
                 <Col>
-                  <Form.Label></Form.Label>
+                  <Form.Label />
                   <Form.Control
                     onChange={handleChangePropretyInfo('title', id)}
                     value={title}
                     placeholder="Введите название свойства"
-                  ></Form.Control>
+                  />
                 </Col>
                 <Col className="">
                   <div>
-                    <Form.Label></Form.Label>
+                    <Form.Label />
                     <Form.Control
                       onChange={handleChangePropretyInfo('value', id)}
                       value={value}
                       placeholder="Введите значение свойства"
-                    ></Form.Control>
+                    />
                   </div>
                   <div className="d-flex justify-content-end mt-1">
                     <Button variant="danger">удалить</Button>
@@ -111,6 +112,6 @@ const ModalAddItem = () => {
       </Modal.Body>
     </Modal>
   );
-};
+}
 
 export default ModalAddItem;

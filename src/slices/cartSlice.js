@@ -1,3 +1,5 @@
+/* eslint-disable no-param-reassign */
+
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = { items: [], ids: [], cost: 0 };
@@ -9,9 +11,7 @@ const cartSlice = createSlice({
     addToCart: (state, { payload }) => {
       const { price, id } = payload;
       if (state.ids.includes(id)) {
-        state.items = state.items.map((item) =>
-          item.id === id ? { ...item, count: (item.count += 1) } : item
-        );
+        state.items = state.items.map((item) => (item.id === id ? { ...item, count: (item.count += 1) } : item));
       } else {
         state.items.push({ id, count: 1 });
         state.ids.push(id);
@@ -26,16 +26,12 @@ const cartSlice = createSlice({
     },
     decreamentCountById: (state, { payload }) => {
       const { id, price } = payload;
-      state.items = state.items.map((item) =>
-        item.id === id ? { ...item, count: item.count - 1 } : { ...item }
-      );
+      state.items = state.items.map((item) => (item.id === id ? { ...item, count: item.count - 1 } : { ...item }));
       state.cost -= price;
     },
     incrementCountById: (state, { payload }) => {
       const { id, price } = payload;
-      state.items = state.items.map((item) =>
-        item.id === id ? { ...item, count: item.count + 1 } : { ...item }
-      );
+      state.items = state.items.map((item) => (item.id === id ? { ...item, count: item.count + 1 } : { ...item }));
       state.cost += parseInt(price);
     },
   },
