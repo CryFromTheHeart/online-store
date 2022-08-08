@@ -100,7 +100,11 @@ function CartBox() {
           className="bg-light my-4 p-3 d-inline-block float-right"
           style={{ width: '200px' }}
         >
-          {cost}
+          <h3>Стоимость</h3>
+          <div>
+            {cost}
+            {' Р'}
+          </div>
         </aside>
         <Button as={Link} to={routes.orderPagePath()}>
           Оформить заказ

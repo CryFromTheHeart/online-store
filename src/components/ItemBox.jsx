@@ -3,6 +3,7 @@ import { Pagination } from '@mui/material';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { Button } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
+import AddIcon from '@mui/icons-material/Add';
 import { getStorePageInfo } from '../selectors';
 import { actions } from '../slices';
 import ModalAddItem from './ModalAddItem';
@@ -30,7 +31,7 @@ function Item({
           {Object.entries(desc).map(([key, value]) => (
             <li key={value}>
               {key}
-              :
+              {' : '}
               {value}
             </li>
           ))}
@@ -57,6 +58,12 @@ function ItemBox() {
 
   const dispatch = useDispatch();
 
+  const { openModal } = actions;
+
+  const handleOpenModal = () => {
+    dispatch(openModal());
+  };
+
   const scrollRef = useRef();
 
   const handleChangePage = (event, value) => {
@@ -67,8 +74,11 @@ function ItemBox() {
   return (
     <section ref={scrollRef} className="d-flex flex-column">
       <ModalAddItem />
-      <div className="bg-light my-4 p-3 shadow-sm small">
+      <div className="d-flex justify-content-between bg-light my-4 p-3 shadow-sm">
         <h2 className="text-muted">Товары</h2>
+        <Button onClick={handleOpenModal}>
+          <AddIcon />
+        </Button>
       </div>
       {items.map((item) => (
         <Item

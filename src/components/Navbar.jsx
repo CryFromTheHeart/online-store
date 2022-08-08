@@ -1,20 +1,12 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+
 import { Navbar as BootstrapNavbar, Container, Button } from 'react-bootstrap';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import AddIcon from '@mui/icons-material/Add';
+
 import { Link } from 'react-router-dom';
 import routes from '../routes';
-import { actions } from '../slices';
 
 function Navbar() {
-  const dispatch = useDispatch();
-  const { openModal } = actions;
-
-  const handleOpenModal = () => {
-    dispatch(openModal());
-  };
-
   return (
     <BootstrapNavbar bg="light" expand="lg" className="shadow-sm">
       <Container>
@@ -22,9 +14,6 @@ function Navbar() {
           Online Store
         </BootstrapNavbar.Brand>
         <BootstrapNavbar.Collapse className="justify-content-end">
-          <Button onClick={handleOpenModal}>
-            <AddIcon />
-          </Button>
           <Button className="ms-2" as={Link} to={routes.cartPagePath()}>
             <ShoppingCartIcon />
           </Button>

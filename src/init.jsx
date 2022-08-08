@@ -1,4 +1,5 @@
 import React from 'react';
+import { YMaps } from 'react-yandex-maps';
 import App from './components/App';
 import { Provider } from 'react-redux';
 import store from './slices';
@@ -6,7 +7,9 @@ import store from './slices';
 const init = async () => {
   return (
     <Provider store={store}>
-      <App />
+      <YMaps>
+        <App />
+      </YMaps>
     </Provider>
   );
 };

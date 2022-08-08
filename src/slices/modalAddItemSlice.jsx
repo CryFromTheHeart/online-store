@@ -24,9 +24,10 @@ const modalSlice = createSlice({
     },
     changePropertyInfo: (state, { payload }) => {
       const { key, id, value } = payload;
-      state.propInfo = state.propInfo.map((prop) =>
-        prop.id === id ? { ...prop, [key]: value } : prop
-      );
+      state.propInfo = state.propInfo.map((prop) => (prop.id === id ? { ...prop, [key]: value } : prop));
+    },
+    removeProperty: (state, { payload }) => {
+      state.propInfo = state.propInfo.filter(({ id }) => id !== payload);
     },
   },
 });

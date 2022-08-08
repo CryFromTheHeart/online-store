@@ -12,12 +12,20 @@ import { actions } from '../slices';
 function ModalAddItem() {
   const dispatch = useDispatch();
   const {
-    closeModal, addProperty, changePropertyInfo, addItem,
+    removeProperty,
+    closeModal,
+    addProperty,
+    changePropertyInfo,
+    addItem,
   } = actions;
   const { isOpen, propInfo } = useSelector(getModalInfo);
 
   const handleAddProperty = () => {
     dispatch(addProperty());
+  };
+
+  const handleRemoveProperty = (id) => () => {
+    dispatch(removeProperty(id));
   };
 
   const handleChangePropretyInfo = (key, id) => ({ target }) => {
@@ -99,7 +107,9 @@ function ModalAddItem() {
                     />
                   </div>
                   <div className="d-flex justify-content-end mt-1">
-                    <Button variant="danger">удалить</Button>
+                    <Button onClick={handleRemoveProperty(id)} variant="danger">
+                      Удалить
+                    </Button>
                   </div>
                 </Col>
               </Row>

@@ -1,9 +1,17 @@
-import React from 'react';
-import { Form, Row, Col, Button } from 'react-bootstrap';
+import React, { useState } from 'react';
+import {
+  Form, Row, Col, Button,
+} from 'react-bootstrap';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import { useSelector } from 'react-redux';
+import MapBox from './MapBox';
+import { getCartInfo } from '../selectors';
 
 function OrderBox() {
+  const [address, setAddress] = useState(null);
+  const { ids, cost } = useSelector(getCartInfo);
+
   const formik = useFormik({
     initialValues: {
       phonenumber: '',
@@ -11,7 +19,6 @@ function OrderBox() {
       expairMounth: '',
       expairYear: '',
       cvv: '',
-      address: '',
     },
     validationSchema: yup.object().shape({
       phonenumber: yup
@@ -19,29 +26,34 @@ function OrderBox() {
         .required('Обязательное поле')
         .matches(
           /^(\+7|8)[9][0-9]{9}$/,
-          'Должно быть похоже на шаблон (+7|8)900 000 00 00'
+          'Должно быть похоже на шаблон (+7|8)900 000 00 00',
         ),
       cardNumber: yup
         .string()
         .required('Обязательное поле')
-        .matches(/^[0-9]{16}/, 'Должно содержать только цифры')
+        .matches(/^[0-9]{16}/, 'Должно состоять из цифр')
         .min(16, 'Слишком короткий номера карты'),
       expairMounth: yup
-        .number()
+        .number('Должно состоять из цифр')
         .required('Обязательное поле')
         .lessThan(13, 'Должно быть меньше 13'),
       expairYear: yup
-        .number()
+        .number('Должно состоять из цифр')
         .required('Обязательное поле')
         .moreThan(21, 'Должно быть больше 21'),
       cvv: yup.string().required('Обязательное поле'),
     }),
-    onSubmit: (values) => {},
+    onSubmit: (values) => {
+      console.log({
+        address, ...values, ids, cost,
+      });
+    },
   });
 
   return (
-    <section className="mx-2 shadow-sm p-5 mt-2">
-      <Form onSubmit={formik.handleSubmit} className="col-md-6 mt-3 mt-mb-0">
+    <section className="my-4 shadow-sm p-5 mt-2 container">
+      <h1>Оформление заказа</h1>
+      <Form onSubmit={formik.handleSubmit} className="p-5">
         <h2>Информация о заказчике</h2>
         <Form.Group className="mb-4 form-floating">
           <Form.Control
@@ -141,24 +153,13 @@ function OrderBox() {
           )}
         </Form.Group>
         <h2>Адрес</h2>
-        <Form.Group className="mb-4 form-floating">
-          <Form.Control
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            isInvalid={formik.errors.address && formik.touched.address}
-            name="address"
-            id="address"
-            maxLength={3}
-            value={formik.values.address}
-          />
-          {formik.errors.address && formik.touched.address && (
-            <Form.Control.Feedback type="invalid" tooltip>
-              {formik.errors.address}
-            </Form.Control.Feedback>
-          )}
-          <Form.Label htmlFor="password">Доставка</Form.Label>
+        <Form.Group className="mb-4">
+          <MapBox address={address} setAddress={setAddress} />
         </Form.Group>
-        <Button type="submit">Отправить</Button>
+        <hr />
+        <Button disabled={!address} type="submit">
+          Отправить
+        </Button>
       </Form>
     </section>
   );

@@ -52,4 +52,6 @@ export const getStorePageInfo = (state) => {
   return { page, chunkItems, pageCount };
 };
 
+export const getCartInfo = (state) => state.cartInfo;
+
 export const getModalInfo = (state) => state.modal;
