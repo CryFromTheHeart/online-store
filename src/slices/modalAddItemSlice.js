@@ -19,7 +19,9 @@ const modalSlice = createSlice({
     addProperty: (state) => {
       state.propInfo = [
         ...state.propInfo,
-        { title: '', value: '', id: uniqueId() },
+        {
+          property: '', title: '', value: '', id: uniqueId(),
+        },
       ];
     },
     changePropertyInfo: (state, { payload }) => {

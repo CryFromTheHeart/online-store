@@ -28,10 +28,10 @@ function Item({
       <div className="col">
         <h3 className="border-bottom p-2">{name}</h3>
         <ul>
-          {Object.entries(desc).map(([key, value]) => (
+          {Object.values(desc).map(({ name, value }) => (
             <li key={value}>
-              {key}
-              {' : '}
+              {name}
+              {': '}
               {value}
             </li>
           ))}

@@ -7,9 +7,7 @@ import { getItemsForCart } from '../selectors';
 import { actions } from '../slices';
 import routes from '../routes';
 
-function Item({
-  id, name, desc, price, count,
-}) {
+function Item({ id, name, desc, price, count }) {
   const dispatch = useDispatch();
   const { removeFromCart, incrementCountById, decreamentCountById } = actions;
 
@@ -36,17 +34,20 @@ function Item({
       <div className="col">
         <h3 className="border-bottom p-2">{name}</h3>
         <ul>
-          {Object.entries(desc).map(([key, value]) => (
+          {Object.values(desc).map(({ name: propertyName, value }) => (
             <li key={value}>
-              {key}
-              :
+              {propertyName}
+              {': '}
               {value}
             </li>
           ))}
         </ul>
       </div>
       <div className="col d-flex flex-column p-3">
-        <div className="d-flex justify-content-end fw-bold fs-2">{price}</div>
+        <div className="d-flex justify-content-end fw-bold fs-2">
+          {price}
+          {' Р'}
+        </div>
         <div className="d-flex justify-content-end">
           <Button onClick={handleDeleteItemsFromCart} variant="danger">
             Удалить

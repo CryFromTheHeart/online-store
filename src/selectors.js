@@ -11,7 +11,11 @@ const getSortItems = (chunkItems, sort) => {
 };
 
 const getFilteredItems = (chunkItems, activeFilters) => Object.entries(activeFilters).reduce(
-  (acc, [type, value]) => (value === '' ? acc : acc.filter(({ desc }) => desc[type] === value)),
+  (acc, [type, value]) => (value === ''
+    ? acc
+    : acc
+      .filter(({ desc }) => desc[type])
+      .filter(({ desc }) => desc[type].value === value)),
   chunkItems,
 );
 
@@ -55,3 +59,5 @@ export const getStorePageInfo = (state) => {
 export const getCartInfo = (state) => state.cartInfo;
 
 export const getModalInfo = (state) => state.modal;
+
+export const getFilters = (state) => state.filter;

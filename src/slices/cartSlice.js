@@ -11,14 +11,12 @@ const cartSlice = createSlice({
     addToCart: (state, { payload }) => {
       const { price, id } = payload;
       if (state.ids.includes(id)) {
-        state.items = state.items.map((item) =>
-          item.id === id ? { ...item, count: (item.count += 1) } : item
-        );
+        state.items = state.items.map((item) => (item.id === id ? { ...item, count: (item.count += 1) } : item));
       } else {
         state.items.push({ id, count: 1 });
         state.ids.push(id);
       }
-      state.cost += parseInt(price);
+      state.cost += parseInt(price, 10);
     },
     removeFromCart: (state, { payload }) => {
       const { id: idItem, count, price } = payload;
@@ -28,17 +26,13 @@ const cartSlice = createSlice({
     },
     decreamentCountById: (state, { payload }) => {
       const { id, price } = payload;
-      state.items = state.items.map((item) =>
-        item.id === id ? { ...item, count: item.count - 1 } : { ...item }
-      );
+      state.items = state.items.map((item) => (item.id === id ? { ...item, count: item.count - 1 } : { ...item }));
       state.cost -= price;
     },
     incrementCountById: (state, { payload }) => {
       const { id, price } = payload;
-      state.items = state.items.map((item) =>
-        item.id === id ? { ...item, count: item.count + 1 } : { ...item }
-      );
-      state.cost += parseInt(price);
+      state.items = state.items.map((item) => (item.id === id ? { ...item, count: item.count + 1 } : { ...item }));
+      state.cost += parseInt(price, 10);
     },
   },
 });

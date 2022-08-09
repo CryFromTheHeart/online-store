@@ -1,30 +1,53 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Button } from 'react-bootstrap';
 import { actions } from '../slices';
+import { getFilters } from '../selectors';
+
+function FilterCheckBox({ type, info }) {
+  const { name, filterList } = info;
+
+  const dispatch = useDispatch();
+  const { activeFilter } = actions;
+
+  const handleChangeFilter =
+    (type) =>
+    ({ target }) => {
+      const { value } = target;
+      dispatch(activeFilter({ type, value }));
+    };
+
+  return (
+    <div>
+      <h5>{name}</h5>
+      <select className="my-2" onChange={handleChangeFilter(type)}>
+        <option value="">Все</option>
+        {filterList.map((filterName) => (
+          <option key={filterName} value={filterName}>
+            {filterName}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
+}
 
 function FiltersBox() {
   const dispatch = useDispatch();
-  const { addFilter } = actions;
+  const { resetFilters } = actions;
 
-  const handleChangeFilter = (type) => ({ target }) => {
-    const { value } = target;
-    dispatch(addFilter({ type, value }));
+  const handleResetFilters = () => {
+    dispatch(resetFilters());
   };
+
+  const { filters } = useSelector(getFilters);
 
   return (
     <div className="d-flex flex-column">
-      <h5>Процессор</h5>
-      <select className="my-2" onChange={handleChangeFilter('processor')}>
-        <option value="">Все</option>
-        <option value="amd">Amd</option>
-        <option value="intel">Intel</option>
-      </select>
-      <h5>Кол-во оперативной памяти</h5>
-      <select onChange={handleChangeFilter('ram')}>
-        <option value="">Все</option>
-        <option value="8">8</option>
-        <option value="16">16</option>
-      </select>
+      <Button onClick={handleResetFilters}>Отчистить фильтры</Button>
+      {Object.entries(filters).map(([type, info]) => (
+        <FilterCheckBox key={type} type={type} info={info} />
+      ))}
     </div>
   );
 }

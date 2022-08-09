@@ -48,7 +48,10 @@ function ModalAddItem() {
     }),
     onSubmit: (values) => {
       const desc = Object.fromEntries(
-        propInfo.map(({ title, value }) => [title, value]),
+        propInfo.map(({ property, title, value }) => [
+          property,
+          { name: title, value },
+        ]),
       );
       const item = { id: uniqueId(), desc, ...values };
       dispatch(addItem(item));
@@ -87,14 +90,24 @@ function ModalAddItem() {
 
           <Form.Group className="mb-2">
             <Button onClick={handleAddProperty}>Добавить свойство</Button>
-            {propInfo.map(({ title, value, id }) => (
+            {propInfo.map(({
+              property, title, value, id,
+            }) => (
               <Row key={id}>
+                <Col>
+                  <Form.Label />
+                  <Form.Control
+                    onChange={handleChangePropretyInfo('property', id)}
+                    value={property}
+                    placeholder="ram"
+                  />
+                </Col>
                 <Col>
                   <Form.Label />
                   <Form.Control
                     onChange={handleChangePropretyInfo('title', id)}
                     value={title}
-                    placeholder="Введите название свойства"
+                    placeholder="Озу"
                   />
                 </Col>
                 <Col className="">
@@ -103,7 +116,7 @@ function ModalAddItem() {
                     <Form.Control
                       onChange={handleChangePropretyInfo('value', id)}
                       value={value}
-                      placeholder="Введите значение свойства"
+                      placeholder="12"
                     />
                   </div>
                   <div className="d-flex justify-content-end mt-1">

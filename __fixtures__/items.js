@@ -5,9 +5,18 @@ const items = [
     id: _.uniqueId(),
     name: 'Computer',
     desc: {
-      processor: 'amd',
-      videocard: 'videocard',
-      ram: '8',
+      processor: {
+        name: 'Процессор',
+        value: 'amd',
+      },
+      videocard: {
+        name: 'Видео Карта',
+        value: 'nvidia470',
+      },
+      ram: {
+        name: 'Озу',
+        value: '8',
+      },
     },
     price: '400',
   },
@@ -15,9 +24,18 @@ const items = [
     id: _.uniqueId(),
     name: 'Computer2',
     desc: {
-      processor: 'intel',
-      videocard: 'videocard',
-      ram: '16',
+      processor: {
+        name: 'Процессор',
+        value: 'amd',
+      },
+      videocard: {
+        name: 'Видео Карта',
+        value: 'nvidia470',
+      },
+      ram: {
+        name: 'Озу',
+        value: '8',
+      },
     },
     price: '500',
   },
@@ -25,9 +43,18 @@ const items = [
     id: _.uniqueId(),
     name: 'Computer3',
     desc: {
-      processor: 'amd',
-      videocard: 'videocard',
-      ram: '16',
+      processor: {
+        name: 'Процессор',
+        value: 'amd',
+      },
+      videocard: {
+        name: 'Видео Карта',
+        value: 'nvidia470',
+      },
+      ram: {
+        name: 'Озу',
+        value: '8',
+      },
     },
     price: '300',
   },
@@ -35,9 +62,18 @@ const items = [
     id: _.uniqueId(),
     name: 'Computer4',
     desc: {
-      processor: 'Ryzen',
-      videocard: 'videocard',
-      ram: '16',
+      processor: {
+        name: 'Процессор',
+        value: 'amd',
+      },
+      videocard: {
+        name: 'Видео Карта',
+        value: 'nvidia470',
+      },
+      ram: {
+        name: 'Озу',
+        value: '8',
+      },
     },
     price: '500',
   },
@@ -45,9 +81,18 @@ const items = [
     id: _.uniqueId(),
     name: 'Computer5',
     desc: {
-      processor: 'Intel',
-      videocard: 'videocard',
-      ram: '16',
+      processor: {
+        name: 'Процессор',
+        value: 'amd',
+      },
+      videocard: {
+        name: 'Видео Карта',
+        value: 'nvidia470',
+      },
+      ram: {
+        name: 'Озу',
+        value: '8',
+      },
     },
     price: '500',
   },
@@ -55,9 +100,18 @@ const items = [
     id: _.uniqueId(),
     name: 'Computer61234',
     desc: {
-      processor: 'processor',
-      videocard: 'videocard',
-      ram: '16',
+      processor: {
+        name: 'Процессор',
+        value: 'amd',
+      },
+      videocard: {
+        name: 'Видео Карта',
+        value: 'nvidia470',
+      },
+      ram: {
+        name: 'Озу',
+        value: '8',
+      },
     },
     price: '1000',
   },
@@ -65,9 +119,18 @@ const items = [
     id: _.uniqueId(),
     name: 'Computer7',
     desc: {
-      processor: 'processor',
-      videocard: 'videocard',
-      ram: '16',
+      processor: {
+        name: 'Процессор',
+        value: 'ruzen',
+      },
+      videocard: {
+        name: 'Видео Карта',
+        value: 'nvidia470',
+      },
+      ram: {
+        name: 'Озу',
+        value: '8',
+      },
     },
     price: '500',
   },
@@ -75,9 +138,18 @@ const items = [
     id: _.uniqueId(),
     name: 'Computer7123123',
     desc: {
-      processor: 'processor',
-      videocard: 'videocard',
-      ram: '16',
+      processor: {
+        name: 'Процессор',
+        value: 'intel',
+      },
+      videocard: {
+        name: 'Видео Карта',
+        value: '470',
+      },
+      ram: {
+        name: 'Озу',
+        value: '8',
+      },
     },
     price: '50',
   },
@@ -85,9 +157,18 @@ const items = [
     id: _.uniqueId(),
     name: 'Computer7',
     desc: {
-      processor: 'processor',
-      videocard: 'videocard',
-      ram: '16',
+      processor: {
+        name: 'Процессор',
+        value: 'amd',
+      },
+      videocard: {
+        name: 'Видео Карта',
+        value: 'nvidia470',
+      },
+      ram: {
+        name: 'Озу',
+        value: '12',
+      },
     },
     price: '500',
   },
@@ -95,9 +176,18 @@ const items = [
     id: _.uniqueId(),
     name: 'Computer7',
     desc: {
-      processor: 'processor',
-      videocard: 'videocard',
-      ram: '16',
+      processor: {
+        name: 'Процессор',
+        value: 'amd',
+      },
+      videocard: {
+        name: 'Видео Карта',
+        value: 'nvidia470',
+      },
+      ram: {
+        name: 'Озу',
+        value: '8',
+      },
     },
     price: '5010',
   },
@@ -105,9 +195,18 @@ const items = [
     id: _.uniqueId(),
     name: 'Computer7',
     desc: {
-      processor: 'processor',
-      videocard: 'videocard',
-      ram: '16',
+      processor: {
+        name: 'Процессор',
+        value: 'amd',
+      },
+      videocard: {
+        name: 'Видео Карта',
+        value: 'nvidia470',
+      },
+      ram: {
+        name: 'Озу',
+        value: '8',
+      },
     },
     price: '500',
   },
@@ -115,9 +214,18 @@ const items = [
     id: _.uniqueId(),
     name: 'Computer7',
     desc: {
-      processor: 'processor',
-      videocard: 'videocard',
-      ram: '16',
+      processor: {
+        name: 'Процессор',
+        value: 'amd',
+      },
+      videocard: {
+        name: 'Видео Карта',
+        value: 'nvidia470',
+      },
+      ram: {
+        name: 'Озу',
+        value: '8',
+      },
     },
     price: '500',
   },
@@ -125,9 +233,22 @@ const items = [
     id: _.uniqueId(),
     name: 'Computer7',
     desc: {
-      processor: 'intel',
-      videocard: 'videocard',
-      ram: '16',
+      something: {
+        name: 'Чтото',
+        value: 'uio2',
+      },
+      processor: {
+        name: 'Процессор',
+        value: 'uio',
+      },
+      videocard: {
+        name: 'Видео Карта',
+        value: 'nvidia472',
+      },
+      ram: {
+        name: 'Озу',
+        value: '8',
+      },
     },
     price: '500',
   },
